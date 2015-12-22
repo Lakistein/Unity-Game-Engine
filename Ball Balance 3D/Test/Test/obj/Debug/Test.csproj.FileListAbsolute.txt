@@ -1,0 +1,12 @@
+C:\Users\Lazar\Desktop\Test\Test\bin\Debug\Test.exe.config
+C:\Users\Lazar\Desktop\Test\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
+C:\Users\Lazar\Desktop\Test\Test\bin\Debug\Test.exe
+C:\Users\Lazar\Desktop\Test\Test\bin\Debug\Test.pdb
+C:\Users\Lazar\Desktop\Test\Test\obj\Debug\Test.exe
+C:\Users\Lazar\Desktop\Test\Test\obj\Debug\Test.pdb
+D:\Copy\Copy\AI Assignment\Ball Balance\Test\Test\bin\Debug\Test.exe.config
+D:\Copy\Copy\AI Assignment\Ball Balance\Test\Test\obj\Debug\Test.exe
+D:\Copy\Copy\AI Assignment\Ball Balance\Test\Test\obj\Debug\Test.pdb
+D:\Copy\Copy\AI Assignment\Ball Balance\Test\Test\bin\Debug\Test.exe
+D:\Copy\Copy\AI Assignment\Ball Balance\Test\Test\bin\Debug\Test.pdb
+D:\Copy\Copy\AI Assignment\Ball Balance\Test\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
