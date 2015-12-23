@@ -19,7 +19,7 @@ public class ObjectPool
     {
         pooledObject = obj;
         pooledObjects = new List<GameObject>();
-        for(int i = 0; i < pooledAmount; i++)
+        for (int i = 0; i < pooledAmount; i++)
         {
 
             GameObject ob = Object.Instantiate(pooledObject) as GameObject;
@@ -30,15 +30,15 @@ public class ObjectPool
 
     public GameObject GetPooledObject()
     {
-        for(int i = 0; i < pooledObjects.Count; i++)
+        for (int i = 0; i < pooledObjects.Count; i++)
         {
-            if(!pooledObjects[i].activeInHierarchy)
+            if (!pooledObjects[i].activeInHierarchy)
             {
                 return pooledObjects[i];
             }
         }
 
-        if(willGrow)
+        if (willGrow)
         {
             GameObject obj = Object.Instantiate(pooledObject) as GameObject;
             pooledObjects.Add(obj);
@@ -47,12 +47,4 @@ public class ObjectPool
 
         return null;
     }
-
-    //public void Destroy()
-    //{
-    //    foreach (var item in pooledObjects)
-    //    {
-    //        MonoBehaviour.Destroy(item);
-    //    }
-    //}
 }

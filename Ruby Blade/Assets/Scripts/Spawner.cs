@@ -27,7 +27,7 @@ public class Spawner : MonoBehaviour
         waveUI = GameObject.Find("WaveCount").GetComponent<GUIText>();
         NoOfEnem = GameObject.Find("NoOfEnem").GetComponent<GUIText>();
         waveUI.text = "Current wave: " + currWave.ToString();
-	}
+    }
 
     void Update()
     {
@@ -36,21 +36,18 @@ public class Spawner : MonoBehaviour
     }
 
     void SpawnMonsters(int number)
-	{
-//		if(currNumOfEnemies > MAX_ENEMIES)
-//		return;
-
+    {
         int t2_count = number / 2, t3_count = number / 3;
-        for(int i = 0; i < number; i++)
+        for (int i = 0; i < number; i++)
         {
             goToSpawn = new GameObject();
-    
-            if(currWave >= 3 && t3_count > 0)
+
+            if (currWave >= 3 && t3_count > 0)
             {
                 goToSpawn = type_3;
                 t3_count--;
             }
-            else if(currWave >= 2 && t2_count > 0)
+            else if (currWave >= 2 && t2_count > 0)
             {
                 goToSpawn = type_2;
                 t2_count--;
@@ -68,19 +65,19 @@ public class Spawner : MonoBehaviour
 
     void SpawnWave()
     {
-        if(subWaveCount > 0)
+        if (subWaveCount > 0)
         {
             subWaveTime += Time.deltaTime;
-            if(subWaveTime > SPAWN_SUBWAVE_TIME)
+            if (subWaveTime > SPAWN_SUBWAVE_TIME)
             {
-                SpawnMonsters(currWave  * 3);
+                SpawnMonsters(currWave * 3);
                 subWaveTime -= SPAWN_SUBWAVE_TIME;
                 subWaveCount--;
             }
         }
 
         waveTime += Time.deltaTime;
-        if(waveTime > SPAWN_WAVE_TIME)
+        if (waveTime > SPAWN_WAVE_TIME)
         {
             currWave++;
             waveTime = 0;
@@ -92,7 +89,7 @@ public class Spawner : MonoBehaviour
     void SpawnPoerUp()
     {
         weaponTimeCurr += Time.deltaTime;
-        if(weaponTimeCurr > weaponTime)
+        if (weaponTimeCurr > weaponTime)
         {
             SpawnPowerUp(GetValidPosition());
             weaponTimeCurr = 0;
@@ -117,14 +114,14 @@ public class Spawner : MonoBehaviour
 
         bool spawnTopOrDown = Random.Range(0, 2) == 0;
 
-        if(spawnTopOrDown)
+        if (spawnTopOrDown)
             spawnUp = Random.Range(0, 2) == 0 ? ((camCurrPosTopRight.y < (MapGenerator.Instance.H - 1) * 32 - 32) ? true : false) : ((camCurrPosLowLeft.y > 32) ? false : true);
         else
             spawnRight = Random.Range(0, 2) == 0 ? ((camCurrPosTopRight.x < (MapGenerator.Instance.W - 1) * 32 - 32) ? true : false) : ((camCurrPosLowLeft.x > 32) ? false : true);
 
         do
         {
-            if(spawnTopOrDown)
+            if (spawnTopOrDown)
             {
                 pos.y = spawnUp ? camCurrPosTopRight.y : camCurrPosLowLeft.y;
                 pos.x = (int)Random.Range(camCurrPosLowLeft.x, camCurrPosTopRight.x);
@@ -135,7 +132,7 @@ public class Spawner : MonoBehaviour
                 pos.y = (int)Random.Range(camCurrPosLowLeft.y, camCurrPosTopRight.y);
             }
         }
-        while(IsWallAround(pos));
+        while (IsWallAround(pos));
 
         pos.z = -1;
 
@@ -144,7 +141,7 @@ public class Spawner : MonoBehaviour
 
     bool IsWallAround(Vector2 pos)
     {
-        if(!MapGenerator.Instance.tm.isAccesible(new Vector2(pos.x, pos.y)) ||
+        if (!MapGenerator.Instance.tm.isAccesible(new Vector2(pos.x, pos.y)) ||
            !MapGenerator.Instance.tm.isAccesible(new Vector2(pos.x, pos.y + 32)) ||
            !MapGenerator.Instance.tm.isAccesible(new Vector2(pos.x + 32, pos.y + 32)) ||
            !MapGenerator.Instance.tm.isAccesible(new Vector2(pos.x + 32, pos.y)) ||
@@ -153,7 +150,7 @@ public class Spawner : MonoBehaviour
            !MapGenerator.Instance.tm.isAccesible(new Vector2(pos.x - 32, pos.y - 32)) ||
            !MapGenerator.Instance.tm.isAccesible(new Vector2(pos.x - 32, pos.y)) ||
            !MapGenerator.Instance.tm.isAccesible(new Vector2(pos.x - 32, pos.y + 32)))
-           return true;
+            return true;
 
         return false;
     }

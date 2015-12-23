@@ -11,12 +11,6 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            //PathGenerator.map.Add(new MapPoint(0,0),5);
-            //PathGenerator.map.Add(new MapPoint(1, 0), 5);
-            //PathGenerator.map.Add(new MapPoint(-1, 0), 5);
-
-            //Console.WriteLine("test " + PathGenerator.GetShapeDirection(PathGenerator._1, PathGenerator.dirRep[2]));
-
             try
             {
                 PathGenerator.GeneratePath(50);
@@ -43,7 +37,8 @@ public struct MapPoint
         this.Y = Y;
     }
 }
-public class Val {
+public class Val
+{
     public int val;
     public Val(int val) { this.val = val; }
 }
@@ -59,7 +54,7 @@ public class PathGenerator
 
     public static void PrintMap()
     {
-        
+
 
         int size = 50;
         int[,] arr = new int[size, size];
@@ -79,17 +74,23 @@ public class PathGenerator
                     char ch = ' ';
                     switch (arr[j, i])
                     {
-                        case 5/*_4*/: ch = '-';
+                        case 5/*_4*/:
+                            ch = '-';
                             break;
-                        case 10/*_2*/: ch = '|';
+                        case 10/*_2*/:
+                            ch = '|';
                             break;
-                        case 3/*_1*/: ch = '¬';
+                        case 3/*_1*/:
+                            ch = '¬';
                             break;
-                        case 6/*_3*/: ch = 'Г';
+                        case 6/*_3*/:
+                            ch = 'Г';
                             break;
-                        case 9/*_7*/: ch = '˩';
+                        case 9/*_7*/:
+                            ch = '˩';
                             break;
-                        case 12/*_9*/: ch = 'L';
+                        case 12/*_9*/:
+                            ch = 'L';
                             break;
 
                     }
@@ -110,13 +111,6 @@ public class PathGenerator
     public static byte GetPossibleShapes(byte dirIndex, short lengthLeft, short x, short y, byte[] store)
     {
         byte count = 0, tmp;
-        //if (map.ContainsKey(new MapPoint((short)(x - move[dirIndex, 0]), (short)(y - move[dirIndex, 1]))))
-        //{
-
-
-        //}
-        //else {
-
         for (int i = 0; i < dirs.Length; i++)
         {
             if ((dirs[i] & dirIndexToBin[dirIndex]) != 0)
@@ -129,9 +123,8 @@ public class PathGenerator
                 }
                 store[count++] = dirs[i];
             }
-        loop: ;
+        loop:;
         }
-        //}
         return count;
     }
 
@@ -180,7 +173,8 @@ public class PathGenerator
     public static byte SLOPE_MIN = 3;
     public static byte SLOPE_MAX = 9;
 
-    public static void GenerateType(int lvlDiff) {
+    public static void GenerateType(int lvlDiff)
+    {
         //int length = 10+r.Next(20);
         int length = map.Count;
         float diffRatio = lvlDiff / (float)length;
@@ -195,26 +189,29 @@ public class PathGenerator
         {
             type = TYPE_SIMPLE | S_NORAIL | S_THIN;
         }
-        else if(diffRatio > RAIL_THIN) {
+        else if (diffRatio > RAIL_THIN)
+        {
             type = TYPE_SIMPLE | S_THIN;
         }
         else if (diffRatio > NORAIL_THICK)
         {
             type = TYPE_SIMPLE | S_NORAIL;
         }
-        else {
+        else
+        {
             type = TYPE_SIMPLE;
         }
         foreach (Val item in map.Values)
         {
             item.val |= type;
-            if (bCracks && r.Next(10) == 0) 
+            if (bCracks && r.Next(10) == 0)
                 item.val |= S_CRACKED;
-            if (repTilt > 0) {
+            if (repTilt > 0)
+            {
                 item.val |= S_TILED;
                 repTilt--;
             }
-            else if(bTilt && r.Next(10)==0) repTilt = TILT_MIN+r.Next(TILT_MAX-TILT_MIN);
+            else if (bTilt && r.Next(10) == 0) repTilt = TILT_MIN + r.Next(TILT_MAX - TILT_MIN);
             if (repSlope > 0)
             {
                 item.val |= S_SLOPE;

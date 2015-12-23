@@ -5,8 +5,8 @@ public class AIBehaviour : MonoBehaviour
 {
     Entity entity;
 
-    public State Current { get;	set;}
-		
+    public State Current { get; set; }
+
     protected virtual void Start()
     {
         entity = gameObject.GetComponent<Entity>();
@@ -19,6 +19,6 @@ public class AIBehaviour : MonoBehaviour
             Current.Update(entity);
     }
     public virtual void UpdateBehaviour(AIBehaviour b, Entity entity)
-	{
+    {
     }
 }

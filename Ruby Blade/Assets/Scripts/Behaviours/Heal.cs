@@ -8,8 +8,7 @@ public class Heal : State
     public override void Update(Entity e)
     {
         e.HP += Time.deltaTime * 3;
-        if(e.HP > e.maxHP)
+        if (e.HP > e.maxHP)
             e.HP = e.maxHP;
     }
-
 }

@@ -17,7 +17,6 @@ public class SoundManager : MonoBehaviour
         Instance = this;
     }
 
-    // Use this for initialization
     void Start()
     {
         audio.PlayOneShot(soldierIntro);

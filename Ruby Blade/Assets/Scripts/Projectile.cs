@@ -17,16 +17,16 @@ public class Projectile : Entity
     {
         Move();
         CheckBounds();
-		
-		if(!MapGenerator.Instance.tm.isAccesible(transform.position))
-		{
+
+        if (!MapGenerator.Instance.tm.isAccesible(transform.position))
+        {
             StartCoroutine(Deactivate());
         }
 
-        if(tr.time == 0)
+        if (tr.time == 0)
         {
             _trailTimer -= 1 * Time.deltaTime;
-            if(_trailTimer <= 0)
+            if (_trailTimer <= 0)
             {
                 tr.time = trTime;
                 _trailTimer = 0.1f;
@@ -38,12 +38,12 @@ public class Projectile : Entity
     {
         if (gameObject.tag == "PlayerBullet" && col.gameObject.CompareTag("Enemy"))
         {
-			col.gameObject.SendMessage("TakeDemage", DMG, SendMessageOptions.DontRequireReceiver);
+            col.gameObject.SendMessage("TakeDemage", DMG, SendMessageOptions.DontRequireReceiver);
             StartCoroutine(Deactivate());
         }
-		else if(gameObject.tag == "EnemyBullet" && col.gameObject.CompareTag("Player"))
-		{
-			Player.Instance.TakeDemage(DMG);
+        else if (gameObject.tag == "EnemyBullet" && col.gameObject.CompareTag("Player"))
+        {
+            Player.Instance.TakeDemage(DMG);
             StartCoroutine(Deactivate());
         }
     }
@@ -55,7 +55,7 @@ public class Projectile : Entity
 
     void CheckBounds()
     {
-        if(transform.position.x > MapGenerator.Instance.W * 32 || transform.position.x < 0 ||
+        if (transform.position.x > MapGenerator.Instance.W * 32 || transform.position.x < 0 ||
             transform.position.y > MapGenerator.Instance.H * 32 || transform.position.y < 0)
             StartCoroutine(Deactivate());
     }

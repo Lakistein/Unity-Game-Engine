@@ -22,10 +22,10 @@ public class Cam : MonoBehaviour
         float x = Player.Instance.gameObject.transform.position.x,
         y = Player.Instance.gameObject.transform.position.y;
 
-        if(x < xMin) x = xMin;
-        else if(x > xMax) x = xMax;
-        if(y < yMin) y = yMin;
-        else if(y > yMax) y = yMax;
+        if (x < xMin) x = xMin;
+        else if (x > xMax) x = xMax;
+        if (y < yMin) y = yMin;
+        else if (y > yMax) y = yMax;
         transform.position = new Vector3(x, y, -10);
     }
 }

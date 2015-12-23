@@ -12,7 +12,7 @@ public class SoundManager : MonoBehaviour
 
     void Awake()
     {
-        if(Instance != null && Instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
@@ -33,7 +33,7 @@ public class SoundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Ball.Instance.gameObject.transform.position.y < 0 && !isFalling)
+        if (Ball.Instance.gameObject.transform.position.y < 0 && !isFalling)
         {
             StartCoroutine(FallE());
         }

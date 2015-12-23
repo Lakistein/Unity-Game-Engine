@@ -18,10 +18,10 @@ public class PathApproach : State
                       Player.Instance.gameObject.transform.position.x,
                       Player.Instance.gameObject.transform.position.y
                       );
-        if(p.next != null)
+        if (p.next != null)
             p = p.next;
 
-        if(lastPath != null)
+        if (lastPath != null)
             p = getPath(lastPath, p);
         lastPath = p;
 
@@ -40,7 +40,7 @@ public class PathApproach : State
         move.z = -1;
         mb.moveOrSlide(move);
 
-        if(lastPath != null && MapGenerator.Instance.tm.reachedTile(mb.gameObject.transform.position.x,
+        if (lastPath != null && MapGenerator.Instance.tm.reachedTile(mb.gameObject.transform.position.x,
                                                mb.gameObject.transform.position.y,
                                                 lastPath.x, lastPath.y))
             lastPath = lastPath.next;
@@ -49,17 +49,17 @@ public class PathApproach : State
     {
         Path p = last, p2 = _new;
         int c1 = 0, c2 = 0;
-        while(p.next != null)
+        while (p.next != null)
         {
             c1++;
             p = p.next;
         }
-        while(p2.next != null)
+        while (p2.next != null)
         {
             c2++;
             p2 = p2.next;
         }
-        if(p.x == p2.x && p.y == p2.y)
+        if (p.x == p2.x && p.y == p2.y)
         {
             return last;
         }

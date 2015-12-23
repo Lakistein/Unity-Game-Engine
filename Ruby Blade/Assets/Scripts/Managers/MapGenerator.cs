@@ -12,7 +12,7 @@ public class MapGenerator : MonoBehaviour
     {
         Instance = this;
     }
-    // Use this for initialization
+
     void Start()
     {
         mat = GameObject.Find("AK-47").GetComponent<SpriteRenderer>().material;
@@ -25,11 +25,11 @@ public class MapGenerator : MonoBehaviour
     public Path debugPath;
     void OnDrawGizmos()
     {
-        if(debugPath == null)
+        if (debugPath == null)
             return;
         Path last = debugPath;
         Path p = debugPath.next;
-        while(p != null)
+        while (p != null)
         {
             Gizmos.DrawLine(new Vector2(last.x * 32, last.y * 32), new Vector2(p.x * 32, p.y * 32));
             last = p;
@@ -39,9 +39,9 @@ public class MapGenerator : MonoBehaviour
 
     void DrawMap()
     {
-        for(int i = 0; i < tm.w; i++)
+        for (int i = 0; i < tm.w; i++)
         {
-            for(int j = 0; j < tm.h; j++)
+            for (int j = 0; j < tm.h; j++)
             {
                 GameObject t = DrawTexture(tm.tiles[i, j].tile, tileMesh);
                 t.transform.position = new Vector2(i * 32, j * 32);
@@ -86,9 +86,6 @@ public class MapGenerator : MonoBehaviour
     // Create a mesh and bind the 'msn' texture to it
     public GameObject DrawTexture(Texture tex, Mesh _m1)
     {
-
-        // Create object
-        //Mesh _m1 = CreateMesh();
         GameObject item = (GameObject)new GameObject(
             "Tile",
             typeof(MeshRenderer), // Required to render
@@ -98,17 +95,8 @@ public class MapGenerator : MonoBehaviour
         item.renderer.castShadows = false;
         item.renderer.receiveShadows = false;
         item.renderer.material = mat;
-        // Set texture
-        //var tex = (Texture) Resources.Load ("Ground");
         item.renderer.material.mainTexture = tex;
-
-        // Set shader for this sprite; unlit supporting transparency
-        // If we dont do this the sprite seems 'dark' when drawn. 
-        //var shader = Shader.Find("Unlit/Transparent");
         item.renderer.material.shader = mat.shader;
-
-        // Set position
-
         return item;
     }
 }

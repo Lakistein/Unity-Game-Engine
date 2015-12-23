@@ -13,14 +13,14 @@ public class BasicEnemy : Entity
     {
         Spawner.Instace.currNumOfEnemies--;
         Spawner.Instace.UpdateGUI();
-        if(Random.Range(0, powerUpDropChance) == 0)
+        if (Random.Range(0, powerUpDropChance) == 0)
             Spawner.Instace.SpawnPowerUp(transform.position);
         base.Die();
     }
 
-	public override void TakeDemage (int dmg)
-	{
-		base.TakeDemage (dmg); 
-		stunnedFor = 0.5f;
-	}
+    public override void TakeDemage(int dmg)
+    {
+        base.TakeDemage(dmg);
+        stunnedFor = 0.5f;
+    }
 }

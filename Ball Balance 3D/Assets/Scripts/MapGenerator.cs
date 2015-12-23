@@ -42,13 +42,13 @@ public class MapGenerator : MonoBehaviour
         GenerateType(map, 100 * level/*200000*/);
         Debug.Log("size AAA " + map.Count);
         MapPoint last = new MapPoint(0, 0);
-        foreach(KeyValuePair<MapPoint, Val> item in map)
+        foreach (KeyValuePair<MapPoint, Val> item in map)
         {    //x,y
-            if(item.Value.val == int.MaxValue) continue;
+            if (item.Value.val == int.MaxValue) continue;
             GameObject g = null;
             last = item.Key;
 
-            if((item.Value.val & TYPE_BLOCK) != 0)
+            if ((item.Value.val & TYPE_BLOCK) != 0)
             {
                 g = blockBoxPush;
                 g.transform.position = new Vector3(item.Key.X, 0, item.Key.Y);
@@ -58,7 +58,7 @@ public class MapGenerator : MonoBehaviour
                 b.transform.position = new Vector3(item.Key.X, 0.5f, item.Key.Y);
                 Instantiate(b);
 
-                switch((item.Value.val & DIR_MASK))
+                switch ((item.Value.val & DIR_MASK))
                 {
                     case 0:
                         g.transform.rotation = Quaternion.Euler(-90, -90, 0);
@@ -86,7 +86,7 @@ public class MapGenerator : MonoBehaviour
 
                 g.transform.position = new Vector3(x, 0, z);
 
-                switch((item.Value.val & DIR_MASK))
+                switch ((item.Value.val & DIR_MASK))
                 {
                     case _4:
                         g.transform.rotation = Quaternion.Euler(-90, 0, 0);
@@ -117,7 +117,7 @@ public class MapGenerator : MonoBehaviour
 
                         break;
                 }
-                if((item.Value.val & S_NORAIL) == 0)
+                if ((item.Value.val & S_NORAIL) == 0)
                 {
                     GameObject rail = curvedB ? railCurved : railStraight;
                     rail.transform.position = g.transform.position;
@@ -134,36 +134,20 @@ public class MapGenerator : MonoBehaviour
     public void shear(GameObject o)
     {
         MeshFilter mf = o.GetComponent<MeshFilter>();
-        //		mf.sharedMesh = (Mesh) Instantiate(mf.sharedMesh );
-        //myRenderer.sharedMesh = (Mesh) Instantiate( myRenderer.sharedMesh );
         Mesh mesh = mf.mesh;
-        //Mesh mesh = mf.sharedMesh;
 
         Vector3[] vertices = mesh.vertices;
 
         int i = 0;
-        while(i < vertices.Length)
+        while (i < vertices.Length)
         {
-            //			float distance = Vector3.Distance(vertices[i], hitPoint);
-            //			Vector3 dir = (vertices[i] - hitPoint);
-            //			if(dir.magnitude < hitRadius){
-            //				float amount = 1 - dir.magnitude / hitRadius;
-            //				Vector3 vertMove = hitDir * amount;
-            //				vertices[i] += vertMove;
-            //			}
             vertices[i].x *= 5;
-            //vertices[i].z += vertices[i].x;
             i++;
         }
         mesh.vertices = vertices;
 
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
-
-        //		MeshCollider col = o.GetComponent<MeshCollider> ();
-
-        //		Destroy (o.GetComponent<MeshCollider> ());
-        //		o.AddComponent ("MeshCollider");
     }
 
     public const byte _1 = 3, _3 = 6, _7 = 9, _9 = 12, _2 = 10, _4 = 5;
@@ -199,48 +183,6 @@ public class MapGenerator : MonoBehaviour
         B_MOVINGBOX.xExit = 0;
         B_MOVINGBOX.yExit = 3;
     }
-    //public static void PrintMap()
-    //{
-
-
-    //    int size = 50;
-    //    int[,] arr = new int[size, size];
-    //    foreach (KeyValuePair<MapPoint, Val> item in map)
-    //    {
-    //        arr[item.Key.X + 5, item.Key.Y + 5] = item.Value.val;
-    //    }
-
-    //    for (int i = 0; i < size; i++)
-    //    {
-    //        for (int j = 0; j < size; j++)
-    //        {
-    //            if (arr[j, i] == 0)
-    //                Console.Write(" ");
-    //            else
-    //            {
-    //                char ch = ' ';
-    //                switch (arr[j, i])
-    //                {
-    //                    case 5/*_4*/: ch = '-';
-    //                        break;
-    //                    case 10/*_2*/: ch = '|';
-    //                        break;
-    //                    case 3/*_1*/: ch = '¬';
-    //                        break;
-    //                    case 6/*_3*/: ch = 'Г';
-    //                        break;
-    //                    case 9/*_7*/: ch = '˩';
-    //                        break;
-    //                    case 12/*_9*/: ch = 'L';
-    //                        break;
-
-    //                }
-    //                Console.Write(ch);
-    //            }
-    //        }
-    //        Console.WriteLine();
-    //    }
-    //}
 
     public static byte GetShapeDirection(byte shape, byte dirToRemoveBinary)
     {
@@ -252,25 +194,25 @@ public class MapGenerator : MonoBehaviour
         byte count = 0, tmp;
 
         bool add;
-        for(int i = 0; i < dirs.Length; i++)
+        for (int i = 0; i < dirs.Length; i++)
         {
-            if((dirs[i] & dirIndexToBin[dirIndex]) != 0)
+            if ((dirs[i] & dirIndexToBin[dirIndex]) != 0)
             {
 
                 add = true;
                 tmp = GetShapeDirection(dirs[i], dirIndexToBin[dirIndex]);
                 Debug.Log("shape " + i);
-                for(int j = 0; j < lengthLeft; j++)
+                for (int j = 0; j < lengthLeft; j++)
                 {
 
-                    if(map.ContainsKey(new MapPoint((short)(x + move[tmp, 0] * j), (short)(y + move[tmp, 1] * j))))
+                    if (map.ContainsKey(new MapPoint((short)(x + move[tmp, 0] * j), (short)(y + move[tmp, 1] * j))))
                     {
                         add = false;
                         Debug.Log("CONTAINS + x " + (x + move[tmp, 0] * j) + ", y " + (y + move[tmp, 1] * j));
                         break;
                     }
                 }
-                if(add)
+                if (add)
                     store[count++] = dirs[i];
             }
         }
@@ -284,20 +226,19 @@ public class MapGenerator : MonoBehaviour
         byte[] store = new byte[4];
         byte dirIndex = 3, size, tmp;
         map.Add(new MapPoint(0, 0), new Val(_4));
-        // Console.WriteLine("Adding " + x + "," + y + "..." + dirIndex);
         bool spawnBlock = false;
         BlockType toSpawn = B_MOVINGBOX;
 
-        for(int i = 1; i < length; i++)
+        for (int i = 1; i < length; i++)
         {
             x -= move[dirIndex, 0];
             y -= move[dirIndex, 1];
-            if(Random.Range(0, 10) == 0) spawnBlock = true;
-            if(spawnBlock && i + 1 < length && IfBPlaceableSpawn(map, x, y, dirIndex, toSpawn))
+            if (Random.Range(0, 10) == 0) spawnBlock = true;
+            if (spawnBlock && i + 1 < length && IfBPlaceableSpawn(map, x, y, dirIndex, toSpawn))
             {
                 spawnBlock = false;
                 Debug.Log("BLOCK SPAWNED ");
-                switch((dirIndex + 2) % 4)
+                switch ((dirIndex + 2) % 4)
                 {
                     case 0:
                         x = x + toSpawn.xExit;
@@ -319,13 +260,12 @@ public class MapGenerator : MonoBehaviour
                 continue;
             }
             size = GetPossibleShapes(map, dirIndex, (short)(length - i), (short)x, (short)y, store);
-            if(size == 0) { Debug.Log("ERROR no possible shape " + x + ", " + y + ", dirI " + dirIndex); return; }
+            if (size == 0) { Debug.Log("ERROR no possible shape " + x + ", " + y + ", dirI " + dirIndex); return; }
             tmp = store[Random.Range(0, size)];
             Debug.Log("Adding " + x + "," + y + "...sh " + tmp + ", " + dirIndex);
             map.Add(new MapPoint((short)x, (short)y), new Val(tmp));
 
             dirIndex = (byte)((GetShapeDirection(tmp, dirIndexToBin[dirIndex]) + 2) % 4);
-            // Console.WriteLine("new drep " + dirIndex);
         }
     }
 
@@ -334,7 +274,7 @@ public class MapGenerator : MonoBehaviour
         dirIndex = (byte)((dirIndex + 2) % 4);
         int xI = 0, yI = 0;
         byte w = block.w, h = block.h;
-        switch(dirIndex)
+        switch (dirIndex)
         {
             case 0:
                 xI = x - block.xEntry;
@@ -361,20 +301,19 @@ public class MapGenerator : MonoBehaviour
                 break;
         }
 
-        for(int i = 0; i < w; i++)
+        for (int i = 0; i < w; i++)
         {
-            for(int j = 0; j < h; j++)
+            for (int j = 0; j < h; j++)
             {
-                if(map.ContainsKey(new MapPoint((short)(xI + i), (short)(yI + j)))) return false;
+                if (map.ContainsKey(new MapPoint((short)(xI + i), (short)(yI + j)))) return false;
             }
         }
 
         Debug.Log("d " + dirIndex);
-        for(int i = 0; i < w; i++)
+        for (int i = 0; i < w; i++)
         {
-            for(int j = 0; j < h; j++)
-                //if(x+move[dirIndex,0] == xI+i && y+move[dirIndex,1] == yI+j)
-                if(x == xI + i && y == yI + j)
+            for (int j = 0; j < h; j++)
+                if (x == xI + i && y == yI + j)
                 {
                     map.Add(new MapPoint((short)(xI + i), (short)(yI + j)), new Val(dirIndex | TYPE_BLOCK));
                     Debug.Log("Adding BLOCK " + (xI + i) + "," + (yI + j));
@@ -411,7 +350,6 @@ public class MapGenerator : MonoBehaviour
 
     public static void GenerateType(Dictionary<MapPoint, Val> map, int lvlDiff)
     {
-        //int length = 10+r.Next(20);
         int length = map.Count;
         float diffRatio = lvlDiff / (float)length;
 
@@ -421,15 +359,15 @@ public class MapGenerator : MonoBehaviour
         int repTilt = 0, repSlope = 0;
 
         int type;
-        if(diffRatio > NORAIL_THIN)
+        if (diffRatio > NORAIL_THIN)
         {
             type = TYPE_SIMPLE | S_NORAIL | S_THIN;
         }
-        else if(diffRatio > RAIL_THIN)
+        else if (diffRatio > RAIL_THIN)
         {
             type = TYPE_SIMPLE | S_THIN;
         }
-        else if(diffRatio > NORAIL_THICK)
+        else if (diffRatio > NORAIL_THICK)
         {
             type = TYPE_SIMPLE | S_NORAIL;
         }
@@ -437,25 +375,25 @@ public class MapGenerator : MonoBehaviour
         {
             type = TYPE_SIMPLE;
         }
-        foreach(Val item in map.Values)
+        foreach (Val item in map.Values)
         {
-            if(item.val == int.MaxValue) continue;
-            if((item.val & TYPE_BLOCK) != 0) continue;
+            if (item.val == int.MaxValue) continue;
+            if ((item.val & TYPE_BLOCK) != 0) continue;
             item.val |= type;
-            if(bCracks && Random.Range(0, 10) == 0)
+            if (bCracks && Random.Range(0, 10) == 0)
                 item.val |= S_CRACKED;
-            if(repTilt > 0)
+            if (repTilt > 0)
             {
                 item.val |= S_TILED;
                 repTilt--;
             }
-            else if(bTilt && Random.Range(0, 10) == 0) repTilt = TILT_MIN + Random.Range(0, TILT_MAX - TILT_MIN);
-            if(repSlope > 0)
+            else if (bTilt && Random.Range(0, 10) == 0) repTilt = TILT_MIN + Random.Range(0, TILT_MAX - TILT_MIN);
+            if (repSlope > 0)
             {
                 item.val |= S_SLOPE;
                 repSlope--;
             }
-            else if(bSlope && Random.Range(0, 10) == 0) repSlope = SLOPE_MIN + Random.Range(0, SLOPE_MAX - SLOPE_MIN);
+            else if (bSlope && Random.Range(0, 10) == 0) repSlope = SLOPE_MIN + Random.Range(0, SLOPE_MAX - SLOPE_MIN);
         }
     }
 }

@@ -23,17 +23,17 @@ public class RangedWeapon : MonoBehaviour
 
     public void Fire()
     {
-        if(recoiling || (currProjAmount <= 0 && magazineCount <= 0))
+        if (recoiling || (currProjAmount <= 0 && magazineCount <= 0))
             return;
 
-        if(Time.time - lastTimeFired >= fireDelay)
+        if (Time.time - lastTimeFired >= fireDelay)
         {
             SpawnProjectile();
             currProjAmount--;
             lastTimeFired = Time.time;
             SoundManager.Instance.PlayGun();
             UpdateGUI();
-            if(currProjAmount <= 0 && magazineCount > 0)
+            if (currProjAmount <= 0 && magazineCount > 0)
             {
                 StartCoroutine(IReload());
             }
@@ -72,7 +72,7 @@ public class RangedWeapon : MonoBehaviour
     {
         magazineCount++;
 
-        if(magazineCount == 1 && currProjAmount == 0)
+        if (magazineCount == 1 && currProjAmount == 0)
         {
             StartCoroutine(IReload());
         }

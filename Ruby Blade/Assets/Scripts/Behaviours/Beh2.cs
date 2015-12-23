@@ -15,15 +15,15 @@ public class Beh2 : AIBehaviour
 
     public override void UpdateBehaviour(AIBehaviour mb, Entity e)
     {
-        if(e.stunnedFor > 0)
+        if (e.stunnedFor > 0)
         {
             e.stunnedFor -= Time.deltaTime;
             return;
         }
         float d = Vector2.Distance(Player.Instance.gameObject.transform.position, mb.gameObject.transform.position);
-        if(e.HP > 20 && !heal)
+        if (e.HP > 20 && !heal)
         {
-            if(distance < d)
+            if (distance < d)
             {
                 mb.Current = path;
             }
@@ -33,9 +33,9 @@ public class Beh2 : AIBehaviour
         else
         {
             heal = true;
-            if(!particleSystem.isPlaying)
+            if (!particleSystem.isPlaying)
                 particleSystem.Play();
-            if(d < fleeDistance)
+            if (d < fleeDistance)
             {
                 mb.Current = Flee.INSTANCE;
                 particleSystem.Stop();
@@ -44,7 +44,7 @@ public class Beh2 : AIBehaviour
             else
             {
                 mb.Current = Heal.INSTANCE;
-                if(e.HP >= e.maxHP)
+                if (e.HP >= e.maxHP)
                 {
                     particleSystem.Stop();
                     particleSystem.Clear();
